@@ -41,7 +41,7 @@ class App:
         """Run the streamlit application
         """
         st.title("Fire Rescue App")
-        input_file_data = st.file_uploader("Choose a file")
+        input_file_data = st.file_uploader("Choose a file", type=['csv'])
         pass
 
 if __name__ == "__main__":
