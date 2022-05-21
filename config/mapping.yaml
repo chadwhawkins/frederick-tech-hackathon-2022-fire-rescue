@@ -1,0 +1,33 @@
+# mapping template file
+templates:
+  - name: temp_name
+    source: source_file
+    target: target_file
+    mapping:
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+  - name: temp_name2
+    source: source_file
+    target: target_file
+    mapping:
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+  - name: temp_name3
+    source: source_file
+    target: target_file
+    mapping:
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+      - source_column: name
+        target_column: name
+        transform: copy/calc
+
