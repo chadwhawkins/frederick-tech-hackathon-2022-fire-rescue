@@ -10,24 +10,15 @@ templates:
       - source_column: name
         target_column: name
         transform: copy/calc
-  - name: temp_name2
-    source: source_file
-    target: target_file
+  - name: LateReport
+    source01: Daily-EMS-CAD.CSV
+    source02: shift_data.csv
+    target01: Daily_CAD_Reconciliation.xlsx
     mapping:
-      - source_column: name
-        target_column: name
-        transform: copy/calc
-      - source_column: name
-        target_column: name
-        transform: copy/calc
-  - name: temp_name3
-    source: source_file
-    target: target_file
-    mapping:
-      - source_column: name
-        target_column: name
-        transform: copy/calc
-      - source_column: name
-        target_column: name
-        transform: copy/calc
+      - source_column:
+        target_column: date
+        transform: now()
+      - source_column: Incident Number
+        target_column: Number of Incidents
+        transform: count()
 
