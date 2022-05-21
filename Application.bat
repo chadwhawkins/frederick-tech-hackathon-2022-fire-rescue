@@ -1,2 +1,2 @@
 cd src
-streamlit run app.py
+.\cli.exe

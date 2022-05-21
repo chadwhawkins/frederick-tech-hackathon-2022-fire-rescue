@@ -25,3 +25,21 @@ Frederick County’s Interagency Information Technology (IIT) Division provides 
 ### Requirements
 Take time to define the functional requirements that are essential for the software to be built.
 The software must be able to automate the process of saving a .csv or .pdf file sent to an Outlook Inbox, add information to an existing Excel Spreadsheet or overwrite an existing Excel Spreadsheet on a network drive, using the existing file name so that Microsoft Power BI can pull the data out of that spreadsheet to develop data visualizations.  This process needs to be able to be turned on and off, but must also occur without prompting when active.  The process can occur either at a scheduled time or be triggered by keywords in the email.  The software must be able to be analyzed by Frederick County IIT staff to ensure security compliance.
+
+
+### Build
+`pyinstaller --distpath src --onefile --additional-hooks-dir=. -w cli.py`
+
+Make sure cli.spec looks like this:
+```
+...
+    datas=[
+        (
+            "{PYTHON_ENV}/Lib/site-packages/streamlit/static",
+            "./streamlit/static"
+        )
+    ],
+...
+```
+
+`pyinstaller --distpath src cli.spec`
