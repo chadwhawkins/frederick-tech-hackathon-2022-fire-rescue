@@ -74,6 +74,7 @@ class App:
 
             df = self.data_tool.merge_to_base(f"../data/{daily_report.name}")
             st.dataframe(df)
+            st.line_chart(df["Number of Incidents"])
         
 
 if __name__ == "__main__":
