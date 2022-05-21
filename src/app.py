@@ -1,5 +1,6 @@
 from typing import Optional, Dict
 import streamlit as st
+from data_tool import DataTool
 import pandas as pd
 import yaml
 
@@ -7,7 +8,8 @@ class App:
     def __init__(self) -> None:
         """Init app
         """
-        pass
+        self.data_tool = DataTool()
+    
     
     def data_import(self, file_path: str) -> pd.DataFrame:
         """Import data from csv and output a pandas dataframe
@@ -19,6 +21,7 @@ class App:
             pd.DataFrame: A dataframe of the CSV file
         """
         file_data_frame = pd.read_csv(file_path, sep=",")
+        
         return file_data_frame
     
     def parse_template(self, template_path: str) -> Dict:
@@ -37,7 +40,7 @@ class App:
                 print("An error occurred while reading the template file")
         return template_map
 
-    def create_dropdown(self, templates: tuple):
+    def create_dropdown(self):
         """Create a dropdown menu for the user to select from the different templates
 
         Args:
@@ -46,11 +49,8 @@ class App:
         Returns:
             st.selectbox: A dropdown menu for the templates
         """
-        options = st.selectbox("Select Template", ("A", "B", "C"))
-        return options
-
         templateList = []
-        templatePath = self.parse_template("config/mapping.yaml")
+        templatePath = self.parse_template("../config/mapping.yaml")
 
         # Iterate through the yaml dictionary
         for template in templatePath["templates"]:
@@ -64,10 +64,17 @@ class App:
         """Run the streamlit application
         """
         st.title("Fire Rescue App")
-        dropdown_menu = self.create_dropdown(self.parse_yaml())
-        input_file_data = st.file_uploader("Choose a file")
-        temp = self.parse_template(template_path="config/mapping.yaml")
-        st.write(temp["templates"][0]["name"])
+        self.create_dropdown()
+        input_file_data = st.file_uploader("Choose base file")
+        daily_report = st.file_uploader("Daily Report")
+
+        if input_file_data is not None and daily_report is not None:
+            st.write("Base file:", input_file_data.name)
+            st.write("Report file:", daily_report.name)
+
+            df = self.data_tool.merge_to_base(f"../data/{daily_report.name}")
+            st.dataframe(df)
+        
 
 if __name__ == "__main__":
     app = App()
