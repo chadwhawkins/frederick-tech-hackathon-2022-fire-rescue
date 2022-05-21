@@ -32,7 +32,7 @@ class App:
         Returns:
             Dict: A dictionary mapping the various column names
         """
-        with open(f"{pathname}", mode="r") as template:
+        with open(pathname, mode="r") as template:
             try:
                 template_map = yaml.safe_load(template)
             except yaml.YAMLError as e:
