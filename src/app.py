@@ -34,6 +34,16 @@ class App:
         options = st.selectbox("Select Template", ("A", "B", "C"))
         return options
 
+        templateList = []
+        templatePath = self.parse_template("config/mapping.yaml")
+
+        # Iterate through the yaml dictionary
+        for template in templatePath["templates"]:
+            templateList.append(template['name'])  # Add each name to the list
+
+        # create the dropdown menu with the list as a tuple
+        dropdown = st.selectbox("Select Template", tuple(templateList))
+        return dropdown
 
     def run(self) -> None:
         """Run the streamlit application
