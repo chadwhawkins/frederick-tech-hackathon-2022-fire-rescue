@@ -48,7 +48,7 @@ class App:
         templateList = []
         templatePath = self.parse_template("config/mapping.yaml")
 
-        # Iterate through dictionary
+        # Iterate through the yaml dictionary
         for template in templatePath["templates"]:
             templateList.append(template['name'])  # Add each name to the list
 
