@@ -20,6 +20,7 @@ class App:
             pd.DataFrame: A dataframe of the CSV file
         """
         file_data_frame = pd.read_csv(file_path, sep=",")
+
         return file_data_frame
 
     def parse_template(self, pathname: str) -> Dict:
@@ -56,12 +57,46 @@ class App:
         dropdown = st.selectbox("Select Template", tuple(templateList))
         return dropdown
 
+    def create_submit_button(self) -> st.button:
+        """Create a submit button for the user
+
+        Returns:
+            st.button: A button that allows the user to submit
+        """
+        return st.button('Submit')
+
+    def create_file_uploader(self, header_text: str) -> st.file_uploader:
+        """Parse the template file to create a map
+
+        Args:
+            header_text (str): Header text to describe what the file uploader is for
+
+        Returns:
+            st.file_uploader: A file uploader node for the user to upload files
+        """
+        uploaded_file = st.file_uploader(header_text)  # Create the file uploader node
+        if uploaded_file is not None:
+            # After a file has been uploaded, store the data and output it
+            data = uploaded_file.read()
+            st.write("Filename: ", uploaded_file.name)
+            st.write(data)
+
+        return uploaded_file
+
     def run(self) -> None:
         """Run the streamlit application
         """
         st.title("Fire Rescue App")
         dropdown_menu = self.create_dropdown()
-        input_file_data = st.file_uploader("Choose a file")
+        input_file_data = self.create_file_uploader("Choose a file")
+        submit_button = self.create_submit_button()
+        """
+        DO NOT REMOVE THIS LINE!
+        """
+        st.balloons()
+        """
+        DO NOT REMOVE THIS LINE!
+        """
         pass
 
 
