@@ -1,6 +1,7 @@
 import pathlib
 from shutil import copyfile
 import datetime
+import pandas as pd
 
 
 def create_backup(file_path: str) -> None:
@@ -18,5 +19,8 @@ def getShiftDataframe(dateTime):
     if diff == 2:
         return "B"
 
+def write_updated_report(oldfile_path, newfile_path, df):
+    create_backup(oldfile_path)
+    df.to_excel(newfile_path)
 
 
