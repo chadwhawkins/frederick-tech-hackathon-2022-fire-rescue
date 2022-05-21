@@ -92,6 +92,7 @@ class App:
         input_file_data = st.file_uploader("Choose base file", type=['csv'])
         daily_report = st.file_uploader("Daily Report")
 
+
         if input_file_data is not None and daily_report is not None:
             st.write("Base file:", input_file_data.name)
             st.write("Report file:", daily_report.name)
