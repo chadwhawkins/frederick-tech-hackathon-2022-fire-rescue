@@ -28,18 +28,17 @@ The software must be able to automate the process of saving a .csv or .pdf file 
 
 
 ### Build
-`pyinstaller --distpath src --onefile --additional-hooks-dir=. -w cli.py`
-
-Make sure cli.spec looks like this:
+- Install Python 3
+- Run `pip install -r requirements.txt` to install Python packages
+- Run `git lfs install` to manage the large executable file
+- Run `pyi-makespec --onefile --additional-hooks-dir=. cli.py` to specify how the executable should be built
+- Add `("<Python Path>/Lib/site-packages/streamlit/static", "./streamlit/static")` to `datas` in `cli.spec` where `<Python Path>` is the path of your Python 3 installation. For example:
 ```
-...
     datas=[
         (
-            "{$PYTHON_ENV}/Lib/site-packages/streamlit/static",
+            "C:/Users/Name/AppData/Local/Programs/Python/Python39/Lib/site-packages/streamlit/static",
             "./streamlit/static"
         )
     ],
-...
 ```
-
-`pyinstaller --distpath src cli.spec`
+- Run `pyinstaller --distpath src cli.spec` to build the executable
