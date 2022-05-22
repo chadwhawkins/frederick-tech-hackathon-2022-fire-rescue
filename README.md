@@ -35,7 +35,7 @@ Make sure cli.spec looks like this:
 ...
     datas=[
         (
-            "{PYTHON_ENV}/Lib/site-packages/streamlit/static",
+            "{$PYTHON_ENV}/Lib/site-packages/streamlit/static",
             "./streamlit/static"
         )
     ],
